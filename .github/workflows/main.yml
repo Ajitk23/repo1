@@ -1,1 +1,24 @@
+name: ETL Pipeline
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pipeline-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v7
+      - name: setup python
+        uses: actions/python-setup@v4
+        with:
+          python-version: 3.12
+      - name: run extract.py file
+        run: python extract.py
+      - name: run transform.py file
+        run: python transform.py
+      - name: run load.py file
+        run: python load.py
