@@ -15,7 +15,7 @@ jobs:
       - name: setup python
         uses: actions/python-setup@v4
         with:
-          python-version: 3.12
+          python-version: '3.12'
       - name: run extract.py file
         run: python extract.py
       - name: run transform.py file
