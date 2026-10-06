@@ -13,7 +13,7 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v7
       - name: setup python
-        uses: actions/python-setup@v4
+        uses: actions/python-setup@v7
         with:
           python-version: '3.12'
       - name: run extract.py file
