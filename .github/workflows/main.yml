@@ -6,19 +6,42 @@ on:
       - main
 
 jobs:
-  pipeline-job:
+  extract-job:
     runs-on: ubuntu-latest
-
     steps:
       - name: checkout code
         uses: actions/checkout@v7
-      - name: setup python
+      - name: setup python version
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'  
+      - name: run extract script
+        run : python extract.py  
+
+
+  transform-job:
+    needs: extract-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v7
+      - name: setup python version
         uses: actions/setup-python@v7
         with:
           python-version: '3.12'
-      - name: run extract.py file
-        run: python extract.py
-      - name: run transform.py file
-        run: python transform.py
-      - name: run load.py file
-        run: python load.py
+      - name: run transform script
+        run: python transform.py  
+
+
+  load-job:
+    needs: transform-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v7
+      - name: setup python version
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'  
+      - name: run load script
+        run: python load.py  
